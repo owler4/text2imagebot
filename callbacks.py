@@ -27,9 +27,9 @@ async def about_callback(update):
 
 async def settings_callback(update, settings):
     await update.message.edit_text(
-        text=f"""Current Settings:\n🤖 Model: {settings['model']}\n🚶‍♂️ Steps: {settings['steps']}\n
-        🌱 Seed: {settings['seed']} \n
-        🖼️ Image Count: {settings['image_count']}""",
+        text=f"""Текущие настройки:\n🤖 Модель: {settings['model']}\n🚶‍♂️ Шаги: {settings['steps']}\n
+        🌱 Сид: {settings['seed']} \n
+        🖼️ Кол-во: {settings['image_count']}""",
         reply_markup=SETTINGS,
         disable_web_page_preview=True,
     )
@@ -37,9 +37,9 @@ async def settings_callback(update, settings):
 
 async def choose_model_callback(update, settings):
     await update.message.edit_text(
-        text=f"""Current Settings:\n🤖 Model: {settings['model']}\n🚶‍♂️ Steps: {settings['steps']}\n
-        🌱 Seed: {settings['seed']} \n
-        🖼️ Image Count: {settings['image_count']}""",
+        text=f"""Текущие настройки:\n🤖 Модель: {settings['model']}\n🚶‍♂️ Шаги: {settings['steps']}\n
+        🌱 Сид: {settings['seed']} \n
+        🖼️ Кол-во: {settings['image_count']}""",
         reply_markup=MODELS_BUTTON,
         disable_web_page_preview=True,
     )
@@ -139,8 +139,8 @@ async def image_decre_callback(update, settings, settings_file_path):
 
 async def back2settings_callback(update, settings):
     await update.message.edit_text(
-        text=f"""Current Settings:\n🤖 Model: {settings['model']}\n🚶‍♂️ Steps: {settings['steps']}\n
-        🌱 Seed: {settings['seed']} \n🖼️ Image Count: {settings['image_count']}""",
+        text=f"""Текущие настройки:\n🤖 Модель: {settings['model']}\n🚶‍♂️ Шаги: {settings['steps']}\n
+        🌱 Сид: {settings['seed']} \n🖼️ Кол-во: {settings['image_count']}""",
         reply_markup=SETTINGS,
         disable_web_page_preview=True,
     )
