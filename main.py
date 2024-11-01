@@ -39,7 +39,7 @@ if bot_token is None or api_id is None or api_hash is None:
 
 DEFAULT_SETTINGS = {
     "model": "digiplay/Juggernaut_final",  # change default model in env
-    "steps": 100,
+    "steps": 50,
     "seed": -1,
     "image_count": 1,
 }
@@ -120,18 +120,18 @@ async def generate(bot, update: Message):
         if not os.path.exists(settings_file_path):
             with open(settings_file_path, "w") as f:
                 json.dump(DEFAULT_SETTINGS, f, indent=4)
-        text = await update.reply_text("Loading settings...", quote=True)
+        text = await update.reply_text("Загрузка конфигурации...", quote=True)
         prompt = update.reply_to_message.text
         with open(f"{chat_id}-settings.json") as f:
             settings = json.load(f)
-            await text.edit("Settings Loaded...")
-            await text.edit(f'Downloading...\n{settings.get("model")}')
+            await text.edit("Конфигурация загружена...")
+            await text.edit(f'Загрузка...\n{settings.get("model")}')
             model_loaded = await load_model(settings.get("model"), update)
             if not model_loaded:
-                await update.reply_text("Failed to load the model.")
+                await update.reply_text("Ошибка загрузки модели.")
                 return
             else:
-                await text.edit("Generating Image...")
+                await text.edit("Генерирую изображение...")
             try:
                 images = await generate_image(
                     update,
@@ -142,25 +142,20 @@ async def generate(bot, update: Message):
                 )
                 await text.edit(f'Uploading {settings.get("image_count")} Image ....')
                 for image in images:
-                    await update.reply_photo(image, reply_markup=GITHUB_BUTTON)
+                    await update.reply_photo(image)
                 await text.delete()
             except Exception as e:
                 await text.delete()
-                text = f"Failed to generate Image \nCreate an issue here"
-                error = f"ERROR: {(str(e))}"
-                error_link = f"{GITHUB_LINK}/issues/new?title={quote(error)}"
-                issue_markup = InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("Create Issue", url=error_link)]]
-                )
+                text = f"Ошибка генерации изображения"
+                error = f"ОШИБКА: {(str(e))}"
                 await update.reply_text(
                     text,
                     disable_web_page_preview=True,
-                    quote=True,
-                    reply_markup=issue_markup,
+                    quote=True
                 )
     else:
         await update.reply_text(
-            text="Reply /generate to a prompt",
+            text="Ответь командой "/generate" на сообщение с промтом",
             disable_web_page_preview=True,
             quote=True,
         )
@@ -173,14 +168,10 @@ async def load_model(model, update):
         pipe = pipe.to("cuda")
         return True
     except Exception as e:
-        text = f"Failed to download Model \nCreate an issue here"
-        error = f"ERROR: {(str(e))}"
-        error_link = f"{GITHUB_LINK}/issues/new?title={quote(error)}"
-        issue_markup = InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Create Issue", url=error_link)]]
-        )
+        text = f"Ошибка загрузки модели"
+        error = f"ОШИБКА: {(str(e))}"
         await update.reply_text(
-            text, disable_web_page_preview=True, quote=True, reply_markup=issue_markup
+            text, disable_web_page_preview=True, quote=True
         )
         return False
 
@@ -222,8 +213,8 @@ async def settings(bot, update: Message):
             settings = json.load(f)
             model = settings.get("model")
             steps = settings.get("steps")
-            text = f"Current Settings:\n🤖 Model: {model}\n🔄 Steps: {steps}"
+            text = f"Текущие настройки:\n🤖 Модель: {model}\n🔄 Шаги: {steps}"
             await update.reply_text(text=text, reply_markup=SETTINGS, quote=True)
 
 
-app.run(print("Bot Running...."))
+app.run(print("Работаем..."))
