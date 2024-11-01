@@ -2,40 +2,27 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from models import MODELS
 
 HELP = """
-● Send a Prompt , Reply /generate to the Prompt to start Image Generation
+Для генерации изображения ответь командой /promt на сообщение с промтом
 """
 
-START_STRING = """ **Hello {}, I'm Text to Image bot**
-Capable of running all Large image Generation Models from huggingface.
+START_STRING = """ **Доброго времени суток, {}!**
+Я работаю в тестовом режиме
 
-`Join My Updates Channel for Getting more familiar with me`
-
+Для генерации изображения ответь командой /promt на сообщение с промтом
 """
 
 ABOUT = """
-● **AUTHOR :** [bughunter0](https://t.me/bughunter0) 
 ● **LIBRARY :** `Pyrogram` 
 ● **LANGUAGE :** `Python 3.10` 
-● **SOURCE :** [BugHunterBots](https://github.com/nuhmanpk) 
 """
-
-GITHUB_LINK = "https://github.com/nuhmanpk/text2imagebot"
-
-CHANNEL_BUTTON = InlineKeyboardMarkup(
-    [[InlineKeyboardButton("↗ Join Here ↗", url="https://t.me/BughunterBots")]]
-)
-
-GITHUB_BUTTON = InlineKeyboardMarkup(
-    [[InlineKeyboardButton("↗ Source Code ↗", url=GITHUB_LINK)]]
-)
 
 START_BUTTON = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton("ABOUT", callback_data="cbabout"),
-            InlineKeyboardButton("HELP", callback_data="cbhelp"),
+            InlineKeyboardButton("ОБО МНЕ", callback_data="cbabout"),
+            InlineKeyboardButton("ПОМОЩЬ", callback_data="cbhelp"),
         ],
-        [InlineKeyboardButton("SETTINGS", callback_data="cbsettings")],
+        [InlineKeyboardButton("НАСТРОЙКИ", callback_data="cbsettings")],
         [
             InlineKeyboardButton("↗ Join Here ↗", url="https://t.me/BughunterBots"),
         ],
@@ -44,28 +31,28 @@ START_BUTTON = InlineKeyboardMarkup(
 CLOSE_BUTTON = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton("Back", callback_data="cbclose"),
+            InlineKeyboardButton("Назад", callback_data="cbclose"),
         ]
     ]
 )
 
 
-BACK = [InlineKeyboardButton("BACK", callback_data="back")]
+BACK = [InlineKeyboardButton("НАЗАД", callback_data="back")]
 
 
 SETTINGS = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton("Choose Model", callback_data="choose_model"),
-            InlineKeyboardButton("Change Steps", callback_data="change_steps"),
+            InlineKeyboardButton("Выбрать модель", callback_data="choose_model"),
+            InlineKeyboardButton("Изменить кол-во шагов", callback_data="change_steps"),
         ],
         [
-            InlineKeyboardButton("Change Seed", callback_data="change_seed"),
+            InlineKeyboardButton("Изменить сид", callback_data="change_seed"),
             InlineKeyboardButton(
-                "Change Image Count", callback_data="change_image_count"
+                "Изменить кол-во изображений", callback_data="change_image_count"
             ),
         ],
-        [InlineKeyboardButton("Save Settings", callback_data="save_settings")],
+        [InlineKeyboardButton("Сохранить конфигурацию", callback_data="save_settings")],
     ]
 )
 
@@ -74,7 +61,7 @@ MODELS_BUTTON = InlineKeyboardMarkup(
         [InlineKeyboardButton(model, callback_data=f"select_model_{index}")]
         for index, model in enumerate(MODELS)
     ]
-    + [[InlineKeyboardButton("Back", callback_data="cb_back_settings")]]
+    + [[InlineKeyboardButton("Назад", callback_data="cb_back_settings")]]
 )
 
 
