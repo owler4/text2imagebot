@@ -50,7 +50,7 @@ async def selected_model_callback(update, selected_model, settings, settings_fil
     with open(settings_file_path, "w") as f:
         json.dump(settings, f, indent=4)
     await update.message.edit_text(
-        text=f"Selected model: {selected_model}",
+        text=f"Выбранная модель: {selected_model}",
         reply_markup=SETTINGS,
         disable_web_page_preview=True,
     )
@@ -58,7 +58,7 @@ async def selected_model_callback(update, selected_model, settings, settings_fil
 
 async def change_steps_callback(update, settings):
     await update.message.edit_text(
-        text=f"Steps: {settings['steps']}",
+        text=f"Шаги: {settings['steps']}",
         reply_markup=STEPS_BUTTON,
         disable_web_page_preview=True,
     )
@@ -75,7 +75,7 @@ async def step_incre_callback(update, settings, settings_file_path):
     with open(settings_file_path, "w") as f:
         json.dump(settings, f, indent=4)
     await update.message.edit_text(
-        text=f"Steps: {settings['steps']}",
+        text=f"Шаги: {settings['steps']}",
         reply_markup=STEPS_BUTTON,
         disable_web_page_preview=True,
     )
@@ -92,7 +92,7 @@ async def step_decre_callback(update, settings, settings_file_path):
     with open(settings_file_path, "w") as f:
         json.dump(settings, f, indent=4)
     await update.message.edit_text(
-        text=f"Steps: {settings['steps']}",
+        text=f"Шаги: {settings['steps']}",
         reply_markup=STEPS_BUTTON,
         disable_web_page_preview=True,
     )
@@ -131,7 +131,7 @@ async def image_decre_callback(update, settings, settings_file_path):
     with open(settings_file_path, "w") as f:
         json.dump(settings, f, indent=4)
     await update.message.edit_text(
-        text=f"Images: {settings['image_count']}",
+        text=f"Изображений: {settings['image_count']}",
         reply_markup=IMAGE_COUNT_BUTTON,
         disable_web_page_preview=True,
     )
